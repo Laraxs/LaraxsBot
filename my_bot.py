@@ -21,20 +21,22 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
 
     if message.content.startswith('>cool'):
-        await client.send_message(message.channel, 'Who is cool? Type >name namehere')
+        await client.send_message(message.channel, 'Qui est cool ? Ecris >name suivi du nom du membre')
 
         def check(msg):
             return msg.content.startswith('>name')
 
         message = await client.wait_for_message(author=message.author, check=check)
         name = message.content[len('>name'):].strip()
-        await client.send_message(message.channel, '{} is cool indeed'.format(name))
+        server = message.server
+        find = server.get_member_named(name)
+        await client.send_message(message.channel, '{} est cool effectivement'.format(find))
 
 
     if message.content.startswith('>react'):
-        msg = await client.send_message(message.channel, 'React with thumbs up or thumbs down.')
+        msg = await client.send_message(message.channel, "Réagis à mon message avec l'émote de ton choix.")
         res = await client.wait_for_reaction(message=msg)
-        await client.send_message(message.channel, '{0.user} reacted with {0.reaction.emoji}!'.format(res))
+        await client.send_message(message.channel, '{0.user.mention} reacted with {0.reaction.emoji}!'.format(res))
 
 
 
