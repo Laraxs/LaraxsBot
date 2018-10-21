@@ -1,7 +1,7 @@
 import discord
 import time
 
-TOKEN = 'NTAzMTY3MTI0NzE0NTUzMzQ0.Dqymtw.RnamHlYem-IyrgIOUCVsJk-rz9A'
+TOKEN = 'secret'
 
 client = discord.Client()
 
