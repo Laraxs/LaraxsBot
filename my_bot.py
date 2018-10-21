@@ -16,7 +16,7 @@ async def on_message(message):
         if (now>="18"):
             msg = 'Bonsoir {0.author.mention}'.format(message)
             await client.send_message(message.channel, msg)
-        else :
+        else:
             msg = 'Bonjour {0.author.mention}'.format(message)
             await client.send_message(message.channel, msg)
 
@@ -30,7 +30,11 @@ async def on_message(message):
         name = message.content[len('>name'):].strip()
         server = message.server
         find = server.get_member_named(name)
-        await client.send_message(message.channel, '{} est cool effectivement'.format(find))
+        if find is None:
+
+            await client.send_message(message.channel, "L'utilisateur n'existe pas")
+        else:
+         await client.send_message(message.channel, '{} est cool effectivement'.format(find.mention))
 
 
     if message.content.startswith('>react'):
